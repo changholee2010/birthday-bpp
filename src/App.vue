@@ -34,7 +34,7 @@ export default {
     return {
       messages: [],
       newItem: { writer: "", content: "" },
-      apiUrl: "http://localhost:3000/api/messages", // 백엔드 주소로 변경
+      apiUrl: "http://193.122.116.244:3000/api/messages", // 백엔드 주소로 변경
     };
   },
   methods: {
