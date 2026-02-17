@@ -17,7 +17,7 @@
         v-for="(msg, index) in messages"
         :key="index"
         class="bubble"
-        :style="msg.style"
+        :style="getRandomStyle(index)"
       >
         <strong>{{ msg.WRITER }}</strong>
         <p>{{ msg.CONTENT }}</p>
@@ -62,16 +62,24 @@ export default {
       this.fetchMessages(); // 목록 갱신
     },
     // 3. 랜덤 위치 및 색상 생성
-    getRandomStyle() {
-      const top = Math.floor(Math.random() * 70) + 10; // 10% ~ 80% 사이
-      const left = Math.floor(Math.random() * 80) + 5; // 5% ~ 85% 사이
+    getRandomStyle(index) {
+      // 1. 화면을 가로 4칸, 세로 4칸 정도의 격자로 생각합니다.
+      const columns = 4;
+      const row = Math.floor(index / columns);
+      const col = index % columns;
+
+      // 2. 각 격자 안에서 약간의 랜덤값(±5%)을 주어 자연스럽게 배치합니다.
+      const top = row * 20 + 10 + Math.random() * 5;
+      const left = col * 22 + 5 + Math.random() * 5;
+
       const colors = ["#FFD1DC", "#CAF0F8", "#E2F0CB", "#FFEFD5", "#E6E6FA"];
-      const color = colors[Math.floor(Math.random() * colors.length)];
+      const color = colors[index % colors.length]; // 색상도 순차적으로 부여
 
       return {
         top: `${top}%`,
         left: `${left}%`,
         backgroundColor: color,
+        zIndex: index, // 나중에 올라온 글이 위로 오도록
       };
     },
   },
