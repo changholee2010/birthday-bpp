@@ -34,7 +34,7 @@ export default {
     return {
       messages: [],
       newItem: { writer: "", content: "" },
-      apiUrl: "https://yulha.duckdns.org:3000/api/messages", // 백엔드 주소로 변경
+      apiUrl: "https://yulha.duckdns.org/api/messages", // 백엔드 주소로 변경
     };
   },
   methods: {
@@ -96,8 +96,17 @@ export default {
   border-radius: 20px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 200px;
-  animation: float 3s ease-in-out infinite;
-  transition: all 0.5s ease;
+  cursor: pointer;
+  transition: all 0.3s ease; /* 부드러운 전환 */
+  z-index: 1;
+}
+
+/* 마우스를 올렸을 때의 효과 */
+.bubble:hover {
+  transform: scale(1.15) translateY(-5px); /* 크기 키우기 */
+  z-index: 100 !important; /* 무조건 맨 앞으로 */
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05); /* 살짝 밝게 */
 }
 
 /* 둥실둥실 떠다니는 효과 */
